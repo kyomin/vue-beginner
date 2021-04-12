@@ -9,7 +9,13 @@
 <body>
     <div id="app">
         <app-header></app-header>
-        <app-content></app-content>
+        <app-footer></app-footer>
+    </div>
+
+    <div id="app2">
+        <app-header></app-header>
+
+        <!-- 에러 발생! #app을 root로 하는 뷰 인스턴스에만 정의된 지역 컴포넌트이기 때문이다. -->
         <app-footer></app-footer>
     </div>
 
@@ -19,13 +25,10 @@
             Vue.component(컴포넌트 이름, 컴포넌트 내용); => 컴포넌트 등록법
             컴포넌트 이름으로 태그를 만들어 삽입하면, 내용이 그 곳에 들어간다.
             참고로 이는 전역 컴포넌트 등록 방식이다.
+            모든 뷰 인스턴스 내부에 삽입이 가능하다.
         */
         Vue.component('app-header', {
             template: '<h1>header</h1>'
-        });
-
-        Vue.component('app-content', {
-            template: '<div>content</div>'
         });
 
         // Vue 인스턴스를 생성하면 자동으로 root 컴포넌트로 지정된다.
@@ -38,6 +41,10 @@
                     template: '<footer>footer</footer>'
                 }
             }
+        });
+
+        new Vue({
+            el: '#app2'
         });
     </script>
 </body>
