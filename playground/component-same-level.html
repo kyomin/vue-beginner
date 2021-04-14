@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            1. 자식 컴포넌트에서 이벤트를 발생시키며 부모 컴포넌트로 데이터 전달.
+            2. 해당 데이터를 받은 부모는 props로 다른 자식에게 전달.
+
+            이로써 같은 레벨의 컴포넌트 사이의 데이터 전달이 구현되었다.
+        -->
+        <app-header v-bind:propsdata="num"></app-header>
+        <app-content v-on:pass="deliverNum"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            template: '<div>header</div>',
+            props: ['propsdata']
+        }
+        var appContent = {
+            template: '<div>content <button v-on:click="passNum">Pass</button> </div>',
+            methods: {
+                passNum: function() {
+                    this.$emit('pass', 10);
+                }
+            }
+        }
+
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent
+            },
+            data: {
+                num: 0
+            },
+            methods: {
+                // 암묵적으로 하위 이벤트가 발생하며 전달하는 값이 val에 잡힌다.
+                deliverNum: function(val) {
+                    this.num = val;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

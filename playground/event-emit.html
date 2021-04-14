@@ -11,6 +11,7 @@
         <p>{{ num }}</p>
         <!-- <app-header v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위 컴포넌트의 메서드 이름"></app-header> -->
         <!-- pass라는 이벤트가 버튼 클릭 시에 발생하고, 해당 이벤트가 실행되면 상위 컴포넌트의 logText 메서드가 실행 -->
+        <!-- 이벤트는 등록된 컴포넌트에서 발생한다. -->
         <app-header v-on:pass="logText"></app-header>
         <app-content v-on:increase="increaseNumber"></app-content>
     </div>
